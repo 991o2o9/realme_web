@@ -1,5 +1,9 @@
+import { useNavigate } from "react-router-dom";
+import { path } from "../../../utils/constants/Constants";
 import styles from "./HeroBlock.module.scss";
+import { scrollToTop } from "../../../utils/helper/helper";
 export const HeroBlock = () => {
+  const navigate = useNavigate();
   return (
     <section className={styles.hero}>
       <div className={styles.mainInfo}>
@@ -9,7 +13,14 @@ export const HeroBlock = () => {
           <span>120Hz Curved Vision display | 108MP Pro light Camera</span>
         </div>
         <div className={styles.btnArea}>
-          <button>Посмотреть товары</button>
+          <button
+            onClick={() => {
+              navigate(path.productPage);
+              scrollToTop();
+            }}
+          >
+            Посмотреть товары
+          </button>
         </div>
       </div>
     </section>

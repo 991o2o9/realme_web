@@ -5,6 +5,8 @@ import { HomePage } from "../../pages/homePage/HomePage";
 import { LoginPage } from "../../pages/loginPage/LoginPage";
 import { RegisterPage } from "../../pages/RegisterPage/RegisterPage";
 import { ProductPage } from "../../pages/productPage/ProductPage";
+import { MoreAbProductPage } from "../../pages/MoreAbProductPage/MoreAbProductPage";
+import { OrderPage } from "../../pages/OrderPage/OrderPage";
 
 export const Router = createBrowserRouter([
   {
@@ -25,6 +27,14 @@ export const Router = createBrowserRouter([
       {
         path: path.productPage,
         element: <ProductPage />,
+      },
+      {
+        path: path.chosenProduct,
+        element: <MoreAbProductPage />,
+      },
+      {
+        path: path.order,
+        element: <OrderPage />,
       },
     ],
   },

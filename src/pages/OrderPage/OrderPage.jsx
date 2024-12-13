@@ -1,0 +1,9 @@
+import { OrderTable } from "../../modules/OrderModule/Table/OrderTable";
+
+export const OrderPage = () => {
+  return (
+    <div className="container">
+      <OrderTable />
+    </div>
+  );
+};

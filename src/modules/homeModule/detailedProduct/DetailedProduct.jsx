@@ -8,24 +8,28 @@ export const DetailedProduct = () => {
       title: "Realme C33",
       desc: "50MP Sejutaan Terjangkau",
       price: " 22400",
+      id: 1,
     },
     {
       img: "https://hisense.com.au/wp-content/uploads/2023/07/4-scaled.jpg",
       title: "Realme C33",
       desc: "50MP Sejutaan Terjangkau",
       price: " 22400",
+      id: 2,
     },
     {
       img: "https://hisense.com.au/wp-content/uploads/2023/07/4-scaled.jpg",
       title: "Realme C33",
       desc: "50MP Sejutaan Terjangkau",
       price: " 22400",
+      id: 3,
     },
     {
       img: "https://hisense.com.au/wp-content/uploads/2023/07/4-scaled.jpg",
       title: "Realme C33",
       desc: "50MP Sejutaan Terjangkau",
       price: " 22400",
+      id: 4,
     },
   ];
   return (

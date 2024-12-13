@@ -27,7 +27,7 @@ export const Footer = () => {
         <nav>
           <h3>Навигация</h3>
           {navigation.map((item, index) => (
-            <Link key={index} to={item.path}>
+            <Link key={index} to={item.path} onClick={scrollToTop()}>
               <span>{item.label}</span>
             </Link>
           ))}

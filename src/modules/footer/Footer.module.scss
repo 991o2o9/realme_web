@@ -1,0 +1,57 @@
+.footer {
+  padding: 30px 100px;
+  background-color: #ffffff;
+  border-top: 1px solid #0000000d;
+
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      h3 {
+        font-size: 21px;
+        font-weight: 500;
+        color: #000;
+      }
+      span {
+        font-size: 19px;
+        font-weight: 300;
+        color: #000;
+      }
+    }
+    .contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      span:nth-child(1) {
+        font-size: 21px;
+        font-weight: 500;
+        color: #000;
+      }
+      span:nth-child(2) {
+        font-size: 19px;
+        font-weight: 300;
+        color: #000;
+      }
+      .iconPart {
+        display: flex;
+        gap: 10px;
+        * {
+          font-size: 25px;
+          cursor: pointer;
+        }
+      }
+    }
+    .logoPart {
+      max-width: 92px;
+      width: 100%;
+      img {
+        cursor: pointer;
+      }
+    }
+  }
+}

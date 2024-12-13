@@ -1,0 +1,33 @@
+.contentArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 38px;
+  margin: 0px 0px 60px 0px;
+  .textArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 17px;
+    .textItself {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      h2 {
+        font-size: 55px;
+        font-weight: 600;
+        color: #000000;
+      }
+      h3 {
+        font-size: 30px;
+        font-weight: 500;
+        color: #000000;
+      }
+    }
+  }
+  .productList {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+}

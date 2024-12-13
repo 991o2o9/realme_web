@@ -1,0 +1,30 @@
+.productList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 58px 0px;
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 315px;
+    width: 100%;
+    height: 278px;
+    gap: 18px;
+    background-color: #ffffff;
+    border-radius: 30px;
+    transition: 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.02);
+    }
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .img {
+      max-width: 200px;
+    }
+  }
+}

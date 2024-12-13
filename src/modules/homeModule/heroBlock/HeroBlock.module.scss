@@ -1,0 +1,56 @@
+.hero {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  height: 600px;
+
+  &::before {
+    position: absolute;
+    content: "";
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: url(/src/assets/bg.png) no-repeat center;
+    background-size: cover;
+  }
+  .mainInfo {
+    padding: 128px 773px 143px 152px;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+
+    .content {
+      display: flex;
+      flex-direction: column;
+
+      h1 {
+        font-size: 55px;
+        font-weight: 700;
+        color: #000000;
+      }
+      h3 {
+        font-size: 30px;
+        font-weight: 500;
+        color: #000000;
+      }
+      span {
+        font-size: 16px;
+        font-weight: 300;
+        color: #000000;
+      }
+    }
+    .btnArea {
+      display: flex;
+      button {
+        width: fit-content;
+        height: 41px;
+        padding: 10px;
+        background-color: #ffca00;
+        border-radius: 15px;
+        font-weight: 600;
+      }
+    }
+  }
+}

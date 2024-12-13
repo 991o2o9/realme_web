@@ -1,0 +1,28 @@
+.productSection {
+  display: flex;
+  flex-direction: column;
+  .prodHero {
+    position: relative;
+    padding-top: 30px;
+    background-color: #ffca00;
+    height: 220px;
+
+    h2 {
+      font-size: 52px;
+      font-weight: 700;
+      color: #000;
+    }
+    span {
+      font-size: 18px;
+      font-weight: 500;
+      color: #000;
+    }
+  }
+
+  .productList {
+    padding: 20px 0px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+}

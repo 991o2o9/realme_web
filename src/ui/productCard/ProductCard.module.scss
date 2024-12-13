@@ -1,0 +1,49 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 30px;
+  padding: 26px 41px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.02);
+  }
+  .img {
+    height: 198px;
+    width: 100%;
+  }
+  .content {
+    text-align: center;
+    h3 {
+      font-size: 30px;
+      font-weight: 700;
+      color: #000000;
+    }
+    h4 {
+      font-size: 16px;
+      font-weight: 300;
+      color: #000000;
+    }
+    span {
+      font-size: 20px;
+      font-weight: 700;
+      color: #000;
+    }
+  }
+  .btnArea {
+    display: flex;
+    button {
+      width: fit-content;
+      height: 41px;
+      padding: 10px;
+      background-color: #ffca00;
+      color: #000000;
+      border-radius: 15px;
+      font-weight: 600;
+    }
+  }
+}

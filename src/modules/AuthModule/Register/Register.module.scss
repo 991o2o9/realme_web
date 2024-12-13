@@ -1,0 +1,69 @@
+.loginSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  width: 400px;
+  margin: 0px auto;
+  padding: 30px;
+  .titlePart {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h2 {
+      color: #000;
+    }
+    a {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      span {
+        color: #000;
+      }
+      .icon {
+        font-size: 20px;
+      }
+    }
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .inpArea {
+      display: flex;
+      align-items: center;
+      border-radius: 3px;
+      border: 2px solid #22272d;
+      gap: 10px;
+      .iconArea {
+        display: flex;
+        align-items: center;
+        padding: 7px;
+        border-right: 2px solid #22272d;
+        * {
+          font-size: 25px;
+          color: #000;
+        }
+      }
+      input {
+        width: 100%;
+        padding: 10px 5px;
+        color: #000;
+        outline: none;
+      }
+    }
+    .btnArea {
+      width: 100%;
+      button {
+        width: 100%;
+        height: 41px;
+        padding: 10px;
+        background-color: #ffca00;
+        color: #000000;
+        border-radius: 3px;
+        font-weight: 600;
+      }
+    }
+  }
+}

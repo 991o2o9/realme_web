@@ -38,7 +38,7 @@ export const ProductList = () => {
       <section className={styles.prodHero}>
         <Container>
           <h2>Товары</h2>
-          <span>{`11 :общее количество товаров`}</span>
+          <span>{`${data.length} :общее количество товаров`}</span>
         </Container>
       </section>
       <Container>

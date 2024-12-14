@@ -1,11 +1,82 @@
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-  th,
-  td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+.orderPage {
+  .prodHero {
+    position: relative;
+    padding-top: 30px;
+    background-color: #ffca00;
+    height: 220px;
+    margin-bottom: 20px;
+
+    h2 {
+      font-size: 52px;
+      font-weight: 700;
+      color: #000;
+    }
+    span {
+      font-size: 18px;
+      font-weight: 500;
+      color: #000;
+    }
+  }
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    .title {
+      font-size: 21px;
+      color: #000;
+      font-weight: 600;
+    }
+    .price {
+      font-size: 20px;
+      color: #000;
+      font-weight: 400;
+    }
+    .finalPrice {
+      font-size: 20px;
+      color: #000;
+      font-weight: 700;
+    }
+
+    .counter {
+      display: flex;
+      align-items: center;
+      border: 1px solid #e0e0e0;
+      padding: 6px 10px;
+      width: fit-content;
+
+      .button {
+        background: none;
+        border: none;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        color: #000;
+        margin: 0 0.5rem;
+      }
+
+      .count {
+        font-size: 20px;
+        font-weight: 700;
+        color: #000;
+        text-align: center;
+        min-width: 2rem;
+      }
+    }
+  }
+
+  .btn {
+    width: fit-content;
+    padding: 10px 20px;
+    font-size: 20px;
+    background-color: #ffca00;
+    border-radius: 15px;
+    font-weight: 600;
   }
 }

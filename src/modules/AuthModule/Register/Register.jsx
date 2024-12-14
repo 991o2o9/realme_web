@@ -12,7 +12,7 @@ export const Register = () => {
       <div className={styles.loginSection}>
         <div className={styles.titlePart}>
           <h2>Регистрация</h2>
-          <Link to={path.register}>
+          <Link to={path.login}>
             <span>Войти</span>
             <GiClick className={styles.icon} />
           </Link>

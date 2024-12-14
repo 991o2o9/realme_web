@@ -10,5 +10,4 @@ export const path = {
 export const navigation = [
   { label: "Главная", path: path.home },
   { label: "Товары", path: path.productPage },
-  { label: "Заказы", path: path.order },
 ];

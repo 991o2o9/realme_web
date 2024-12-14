@@ -5,17 +5,26 @@
 Стек технологий
 Основные зависимости:
 React ^18.3.1: библиотека для создания пользовательских интерфейсов.
+
 React DOM ^18.3.1: для работы с DOM в React.
+
 React Router DOM ^7.0.2: маршрутизация в приложении.
+
 Redux Toolkit ^2.5.0: для управления состоянием приложения.
+
 React Redux ^9.2.0: интеграция Redux с React.
+
 Axios ^1.7.9: для работы с HTTP-запросами.
+
 React Icons ^5.4.0: набор иконок для React.
+
 Sass Embedded ^1.82.0: препроцессор CSS.
 
 Установка:
 Склонируйте репозиторий:
+
 git clone https://github.com/your-username/your-repo-name.git
 
 Установите зависимости:
+
 npm install

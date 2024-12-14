@@ -1,8 +1,21 @@
-# React + Vite
+Интернет-магазин
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Этот проект представляет собой интернет-магазин, разработанный с использованием React и Vite. Он включает поддержку авторизации, просмотра товаров и заказа определенного товара.
 
-Currently, two official plugins are available:
+Стек технологий
+Основные зависимости:
+React ^18.3.1: библиотека для создания пользовательских интерфейсов.
+React DOM ^18.3.1: для работы с DOM в React.
+React Router DOM ^7.0.2: маршрутизация в приложении.
+Redux Toolkit ^2.5.0: для управления состоянием приложения.
+React Redux ^9.2.0: интеграция Redux с React.
+Axios ^1.7.9: для работы с HTTP-запросами.
+React Icons ^5.4.0: набор иконок для React.
+Sass Embedded ^1.82.0: препроцессор CSS.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Установка:
+Склонируйте репозиторий:
+git clone https://github.com/your-username/your-repo-name.git
+
+Установите зависимости:
+npm install

@@ -2,7 +2,7 @@ import { OrderTable } from "../../modules/OrderModule/Table/OrderTable";
 
 export const OrderPage = () => {
   return (
-    <div>
+    <div className="main">
       <OrderTable />
     </div>
   );

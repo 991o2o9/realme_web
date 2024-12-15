@@ -1,0 +1,84 @@
+/* ActivationCode.module.scss */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+
+  .crossBtn {
+    button {
+      position: absolute;
+      top: 2px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 25px;
+      cursor: pointer;
+      color: #333;
+    }
+  }
+  .btnArea {
+    width: 100%;
+    margin-top: 20px;
+    button {
+      width: 100%;
+      height: 41px;
+      padding: 10px;
+      background-color: #ffca00;
+      color: #000000;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+  }
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    font-size: 20px;
+    color: #333;
+  }
+  margin-bottom: 15px;
+}
+.inpArea {
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+  border: 2px solid #22272d;
+  gap: 10px;
+  .iconArea {
+    display: flex;
+    align-items: center;
+    padding: 7px;
+    border-right: 2px solid #22272d;
+    * {
+      font-size: 25px;
+      color: #000;
+    }
+  }
+  input {
+    width: 100%;
+    padding: 10px 5px;
+    color: #000;
+    outline: none;
+  }
+}

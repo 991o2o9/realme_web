@@ -4,7 +4,7 @@ import { ProductBlock } from "../../modules/homeModule/productBlock/ProductBlock
 
 export const HomePage = () => {
   return (
-    <div>
+    <div className="main">
       <HeroBlock />
       <ProductBlock />
       <DetailedProduct />

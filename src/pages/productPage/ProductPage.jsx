@@ -2,7 +2,7 @@ import { ProductList } from "../../modules/ProductsModule/ProductList/ProductLis
 
 export const ProductPage = () => {
   return (
-    <div>
+    <div className="main">
       <ProductList />
     </div>
   );

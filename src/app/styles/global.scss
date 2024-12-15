@@ -7,6 +7,7 @@
 }
 
 body {
+  height: 100%;
   font-family: "Nunito", serif;
   margin: 0;
   cursor: default;
@@ -14,6 +15,17 @@ body {
   background-color: #f3f3f3;
 }
 
+.main {
+  flex: 1 1 auto;
+}
+
+#root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .container {
   margin: 30px 0px 100px 0px;
+  flex: 1 1 auto;
 }

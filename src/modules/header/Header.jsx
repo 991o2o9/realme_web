@@ -6,9 +6,50 @@ import { IoPersonCircle } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
 import { getTrimmedEmail, scrollToTop } from "../../utils/helper/helper";
 import { useSelector } from "react-redux";
+import { useState, useEffect, useRef } from "react";
+import { handleLogOut } from "../AuthModule/Store/authSlice";
+
 export const Header = () => {
   const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.auth.currentUser);
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const menuRef = useRef(null);
+  const authRef = useRef(null);
+
+  const handleAuthClick = () => {
+    if (!currentUser) {
+      navigate(path.login);
+    } else {
+      setIsMenuVisible((prev) => !prev);
+    }
+  };
+
   const cartItems = useSelector((state) => state.cart.items);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        authRef.current &&
+        !authRef.current.contains(event.target)
+      ) {
+        setIsMenuVisible(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      setIsMenuVisible(false);
+    };
+  }, [navigate]);
 
   return (
     <header className={styles.header}>
@@ -31,10 +72,25 @@ export const Header = () => {
           ))}
         </nav>
       </div>
-      <div className={styles.authPart}>
-        <div onClick={() => navigate(path.login)} className={styles.authItself}>
-          <IoPersonCircle className={styles.authIcon} />
-          <span>{getTrimmedEmail("amin@gmail.com")}</span>
+      <div ref={authRef} className={styles.authPart}>
+        <div className={styles.authWrapper}>
+          <div onClick={handleAuthClick} className={styles.authItself}>
+            <IoPersonCircle className={styles.authIcon} />
+            <span>{currentUser ? getTrimmedEmail(currentUser) : "Войти"}</span>
+          </div>
+          {isMenuVisible && currentUser && (
+            <div ref={menuRef} className={styles.menu}>
+              <button
+                onClick={() => {
+                  handleLogOut();
+                  setIsMenuVisible(false);
+                }}
+                className={styles.logoutButton}
+              >
+                Выйти
+              </button>
+            </div>
+          )}
         </div>
         <Link to={path.order}>
           <div

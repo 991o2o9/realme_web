@@ -55,13 +55,9 @@ export const checkAuth = createAsyncThunk("auth/checkAuth", async () => {
 
 export const checkCode = createAsyncThunk(
   "auth/checkCode",
-  async (formData) => {
+  async ({ email, activationCode }) => {
     try {
-      await axios.get(
-        `API/user/active/${formData.get("email")}/${formData.get(
-          "activationCode"
-        )}`
-      );
+      await axios.post(`API/user/active/${email}/${activationCode}`);
       return "Код активирован";
     } catch (error) {
       throw new Error(error);

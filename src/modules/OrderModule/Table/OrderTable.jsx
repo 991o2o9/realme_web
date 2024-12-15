@@ -4,16 +4,44 @@ import { decrementQuantity, incrementQuantity } from "../store/cartSlice";
 import styles from "./OrderTable.module.scss";
 import { useState } from "react";
 import { Popup } from "../../../ui/PopUpMessage/Popup";
+import { submitOrder } from "../store/createOrder";
 
 export const OrderTable = () => {
   const cartItems = useSelector((state) => state.cart.items);
+  const [popupMessage, setPopupMessage] = useState("");
+  const [popupType, setPopupType] = useState("");
   const dispatch = useDispatch();
-  const [showPopup, setShowPopup] = useState(false);
+
+  const showPopup = (message, type) => {
+    setPopupMessage(message);
+    setPopupType(type);
+    setTimeout(() => setPopupMessage(""), 3000);
+  };
 
   const totalAmount = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
+
+  const handleOrder = () => {
+    const order = {
+      items: cartItems.map((item) => ({
+        productId: item.id,
+        quantity: item.quantity,
+      })),
+      totalAmount,
+    };
+
+    dispatch(submitOrder(order))
+      .unwrap()
+      .then(() => {
+        showPopup("Ваш заказ успешно отправлен!", "success");
+      })
+      .catch((error) => {
+        showPopup("Ошибка при отправке заказа", "error");
+        console.error(error);
+      });
+  };
 
   return (
     <div className={styles.orderPage}>
@@ -88,19 +116,13 @@ export const OrderTable = () => {
               className={styles.content}
             >
               <h2>В итоге: {totalAmount} сом </h2>
-              <button
-                className={styles.btn}
-                onClick={() => {
-                  setShowPopup(true);
-                  setTimeout(() => setShowPopup(false), 3000);
-                }}
-              >
+              <button className={styles.btn} onClick={handleOrder}>
                 Заказать
               </button>
             </div>
           </div>
         </div>
-        {showPopup && <Popup message="Ваш заказ выполнен!" />}
+        {popupMessage && <Popup message={popupMessage} type={popupType} />}
       </Container>
     </div>
   );

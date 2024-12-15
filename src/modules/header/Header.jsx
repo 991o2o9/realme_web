@@ -5,13 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoPersonCircle } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
 import { getTrimmedEmail, scrollToTop } from "../../utils/helper/helper";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect, useRef } from "react";
 import { handleLogOut } from "../AuthModule/Store/authSlice";
 
 export const Header = () => {
   const navigate = useNavigate();
-  const currentUser = useSelector((state) => state.auth.currentUser);
+  const dispatch = useDispatch();
+  const currentUser = localStorage.getItem("email");
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const menuRef = useRef(null);
   const authRef = useRef(null);
@@ -23,6 +24,7 @@ export const Header = () => {
       setIsMenuVisible((prev) => !prev);
     }
   };
+  console.log(currentUser);
 
   const cartItems = useSelector((state) => state.cart.items);
 
@@ -82,7 +84,7 @@ export const Header = () => {
             <div ref={menuRef} className={styles.menu}>
               <button
                 onClick={() => {
-                  handleLogOut();
+                  dispatch(handleLogOut());
                   setIsMenuVisible(false);
                 }}
                 className={styles.logoutButton}

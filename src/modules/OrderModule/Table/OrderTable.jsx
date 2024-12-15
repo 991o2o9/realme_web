@@ -26,10 +26,14 @@ export const OrderTable = () => {
   const handleOrder = () => {
     const order = {
       items: cartItems.map((item) => ({
-        productId: item.id,
+        product: {
+          title: item.title,
+          description: item.description,
+          image: item.img,
+          price: item.price,
+        },
         quantity: item.quantity,
       })),
-      totalAmount,
     };
 
     dispatch(submitOrder(order))

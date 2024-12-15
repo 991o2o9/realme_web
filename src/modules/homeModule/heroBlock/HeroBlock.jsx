@@ -2,15 +2,42 @@ import { useNavigate } from "react-router-dom";
 import { path } from "../../../utils/constants/Constants";
 import styles from "./HeroBlock.module.scss";
 import { scrollToTop } from "../../../utils/helper/helper";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getBanner } from "./api";
 export const HeroBlock = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [banner, setBanner] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await dispatch(getBanner());
+        setBanner(data.payload.results);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [dispatch]);
+
+  if (!banner) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <section className={styles.hero}>
+    <section
+      className={styles.hero}
+      style={{
+        "--hero-background": `url(${banner[0]?.image})`,
+      }}
+    >
       <div className={styles.mainInfo}>
         <div className={styles.content}>
-          <h1>Realme 10 Pro+ 5G </h1>
-          <h3>Curved Display, New Vision</h3>
-          <span>120Hz Curved Vision display | 108MP Pro light Camera</span>
+          <h1>{banner[0]?.title}</h1>
+          <h3>{banner[0]?.description}</h3>
+          <span>{banner[0]?.description_litle}</span>
         </div>
         <div className={styles.btnArea}>
           <button

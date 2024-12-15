@@ -1,25 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  checkAuth,
-  checkCode,
-  handleLogin,
-  handleRegister,
-} from "../Api/AuthApi";
+import { handleLogin, handleRegister } from "../Api/AuthApi";
 
 const authSlice = createSlice({
   name: "auth",
   initialState: {
     currentUser: null,
-    tokens: null,
+    jwt: null,
     error: null,
     isSuccess: false,
   },
   reducers: {
     handleLogOut(state) {
-      localStorage.removeItem("tokens");
+      localStorage.removeItem("jwt");
       localStorage.removeItem("email");
       state.currentUser = null;
-      state.tokens = null;
+      state.jwt = null;
     },
   },
   extraReducers: (builder) => {
@@ -32,25 +27,10 @@ const authSlice = createSlice({
     });
     builder.addCase(handleLogin.fulfilled, (state, action) => {
       state.currentUser = action.payload.currentUser;
-      state.tokens = action.payload.tokens;
+      state.jwt = action.payload.jwt;
       state.error = null;
     });
     builder.addCase(handleLogin.rejected, (state, action) => {
-      state.error = action.payload;
-    });
-    builder.addCase(checkAuth.fulfilled, (state, action) => {
-      state.currentUser = action.payload.currentUser;
-      state.tokens = action.payload.tokens;
-      state.error = null;
-    });
-    builder.addCase(checkAuth.rejected, (state, action) => {
-      state.error = action.payload;
-    });
-    builder.addCase(checkCode.fulfilled, (state) => {
-      state.isSuccess = true;
-      state.error = null;
-    });
-    builder.addCase(checkCode.rejected, (state, action) => {
       state.error = action.payload;
     });
   },

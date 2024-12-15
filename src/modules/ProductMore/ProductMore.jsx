@@ -1,55 +1,28 @@
 import { useParams } from "react-router-dom";
 import { Container } from "../../ui/container/Container";
 import styles from "./ProductMore.module.scss";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../OrderModule/store/cartSlice";
 import { Popup } from "../../ui/PopUpMessage/Popup";
+import { fetchProducts } from "../ProductsModule/Api/ProductApi";
 
 export const ProductMore = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-
-  const data = [
-    {
-      img: "https://hisense.com.au/wp-content/uploads/2023/07/4-scaled.jpg",
-      title: "Realme C33",
-      desc: "50MP Sejutaan Terjangkau",
-      price: 22400,
-      id: 1,
-    },
-    {
-      img: "https://hisense.com.au/wp-content/uploads/2023/07/4-scaled.jpg",
-      title: "Realme C33",
-      desc: "50MP Sejutaan Terjangkau",
-      price: 22400,
-      id: 2,
-    },
-    {
-      img: "https://hisense.com.au/wp-content/uploads/2023/07/4-scaled.jpg",
-      title: "Realme C33",
-      desc: "50MP Sejutaan Terjangkau",
-      price: 22400,
-      id: 3,
-    },
-    {
-      img: "https://hisense.com.au/wp-content/uploads/2023/07/4-scaled.jpg",
-      title: "Realme C33",
-      desc: "50MP Sejutaan Terjangkau",
-      price: 22400,
-      id: 4,
-    },
-  ];
-
-  const oneData = data.find((item) => item.id === parseInt(id));
-
-  // const oneProduct = useSelector((state) => state.products.oneProduct);
-  // useEffect(() => {
-  //   dispatch(fetchOneProducts(id));
-  // }, [dispatch, id]);
-
   const [count, setCount] = useState(1);
   const [showPopup, setShowPopup] = useState(false);
+  const products = useSelector((state) => state.products.products);
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [id, dispatch]);
+
+  const oneProduct = products.find((item) => item.id === parseInt(id));
+
+  if (!oneProduct) {
+    return <div>Загрузка...</div>;
+  }
 
   const increment = () => setCount((prev) => prev + 1);
   const decrement = () => setCount((prev) => (prev > 1 ? prev - 1 : prev));
@@ -57,11 +30,12 @@ export const ProductMore = () => {
   const handleOrder = () => {
     dispatch(
       addToCart({
-        id: oneData.id,
-        title: oneData.title,
-        price: oneData.price,
-        img: oneData.img,
+        id: oneProduct.id,
+        title: oneProduct.title,
+        price: oneProduct.price,
+        img: oneProduct.img || oneProduct.image,
         quantity: count,
+        description: oneProduct.description,
       })
     );
     setShowPopup(true);
@@ -76,13 +50,13 @@ export const ProductMore = () => {
         </div>
         <div className={styles.productItself}>
           <div className={styles.imgSection}>
-            <img src={oneData.img} alt="" />
+            <img src={oneProduct.image} alt={oneProduct.title} />
           </div>
           <div className={styles.contentSection}>
             <div className={styles.text}>
-              <h3>{oneData.title}</h3>
-              <h4>{oneData.desc}</h4>
-              <h5>{oneData.price} сом</h5>
+              <h3>{oneProduct.title}</h3>
+              <h4>{oneProduct.desc}</h4>
+              <h5>{oneProduct.price} сом</h5>
             </div>
             <div className={styles.counter}>
               <button onClick={decrement} className={styles.button}>

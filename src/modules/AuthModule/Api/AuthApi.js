@@ -1,14 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const API_URL = "http://100.27.228.237/api/v1";
+
 export const handleRegister = createAsyncThunk(
   "auth/register",
   async (formData) => {
     try {
-      await axios.post(`API/user/register/`, formData);
+      // eslint-disable-next-line no-unused-vars
+      const response = await axios.post(`${API_URL}/register/`, formData);
       return "Регистрация прошла успешно";
     } catch (error) {
-      throw new Error(error);
+      throw new Error(
+        error.response ? error.response.data.message : error.message
+      );
     }
   }
 );
@@ -17,50 +22,24 @@ export const handleLogin = createAsyncThunk(
   "auth/login",
   async ({ formData, email }) => {
     try {
-      const { data } = await axios.post(`API/user/login/`, formData);
-      localStorage.setItem("tokens", JSON.stringify(data));
+      const { data } = await axios.post(`${API_URL}/login/`, formData);
+
+      localStorage.setItem("jwt", data.jwt);
       localStorage.setItem("email", email);
-      return { tokens: data, currentUser: email };
+
+      return { jwt: data.jwt, currentUser: email };
     } catch (error) {
-      throw new Error(error);
+      throw new Error(
+        error.response ? error.response.data.message : error.message
+      );
     }
   }
 );
 
-export const checkAuth = createAsyncThunk("auth/checkAuth", async () => {
-  try {
-    const tokens = JSON.parse(localStorage.getItem("tokens"));
-    if (!tokens?.refresh) throw new Error("ТОКЕНЫ НЕ НАЙДЕНЫ.");
-    const { data } = await axios.post(
-      `API/user/refresh/`,
-      {
-        refresh: tokens.refresh,
-      },
-      { headers: { "Content-type": "application/json" } }
-    );
-    localStorage.setItem(
-      "tokens",
-      JSON.stringify({ access: data.access, refresh: tokens.refresh })
-    );
-    return {
-      tokens: { access: data.access, refresh: tokens.refresh },
-      currentUser: JSON.parse(localStorage.getItem("email")),
-    };
-  } catch (error) {
-    localStorage.removeItem("tokens");
-    localStorage.removeItem("email");
-    throw new error("Ошибка обновления токенов");
-  }
+export const axiosInstance = axios.create({
+  baseURL: API_URL,
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+  },
 });
-
-export const checkCode = createAsyncThunk(
-  "auth/checkCode",
-  async ({ email, activationCode }) => {
-    try {
-      await axios.post(`API/user/active/${email}/${activationCode}`);
-      return "Код активирован";
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
-);

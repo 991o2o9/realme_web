@@ -33,6 +33,7 @@ export const Login = () => {
       showPopup("Заполните все поля!", "error");
       return;
     }
+
     try {
       const result = await dispatch(
         handleLogin({
@@ -52,7 +53,7 @@ export const Login = () => {
       navigate(path.home);
     } catch (error) {
       const errorMessage =
-        error.response?.data?.message || "Ошибка попробуйте позже!";
+        error.response?.data?.message || "Ошибка, попробуйте позже!";
       showPopup(errorMessage, "error");
     }
   };

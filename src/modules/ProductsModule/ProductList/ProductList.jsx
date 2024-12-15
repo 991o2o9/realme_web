@@ -1,61 +1,31 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Container } from "../../../ui/container/Container";
 import { ProductCard } from "../../../ui/productCard/ProductCard";
 import styles from "./ProductList.module.scss";
+import { useEffect } from "react";
+import { fetchProducts } from "../Api/ProductApi";
 
 export const ProductList = () => {
-  const data = [
-    {
-      img: "https://hisense.com.au/wp-content/uploads/2023/07/4-scaled.jpg",
-      title: "Realme C33",
-      desc: "50MP Sejutaan Terjangkau",
-      price: " 22400",
-      id: 1,
-    },
-    {
-      img: "https://hisense.com.au/wp-content/uploads/2023/07/4-scaled.jpg",
-      title: "Realme C33",
-      desc: "50MP Sejutaan Terjangkau",
-      price: " 22400",
-      id: 2,
-    },
-    {
-      img: "https://hisense.com.au/wp-content/uploads/2023/07/4-scaled.jpg",
-      title: "Realme C33",
-      desc: "50MP Sejutaan Terjangkau",
-      price: " 22400",
-      id: 3,
-    },
-    {
-      img: "https://hisense.com.au/wp-content/uploads/2023/07/4-scaled.jpg",
-      title: "Realme C33",
-      desc: "50MP Sejutaan Terjangkau",
-      price: " 22400",
-      id: 4,
-    },
-  ];
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products.products);
 
-  // const dispatch = useDispatch();
-  // const products = useSelector((state) => state.products.products);
-
-  // useEffect(() => {
-  //   if (products.length === 0) {
-  //     dispatch(fetchProducts());
-  //   }
-  // }, [dispatch, products.length]);
-
-  // console.log(products);
+  useEffect(() => {
+    if (products.length === 0) {
+      dispatch(fetchProducts());
+    }
+  }, [dispatch, products.length]);
 
   return (
     <div className={styles.productSection}>
       <section className={styles.prodHero}>
         <Container>
           <h2>Товары</h2>
-          <span>{`${data.length} :общее количество товаров`}</span>
+          <span>{`${products.length} :общее количество товаров`}</span>
         </Container>
       </section>
       <Container>
         <div className={styles.productList}>
-          {data.map((item, index) => (
+          {products.map((item, index) => (
             <ProductCard item={item} key={index} />
           ))}
         </div>

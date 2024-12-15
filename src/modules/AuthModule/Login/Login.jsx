@@ -76,7 +76,7 @@ export const Login = () => {
             <input
               type="text"
               name="email"
-              placeholder="Введите вашу почту (обязательно)"
+              placeholder="Введите вашу почту*"
               value={formData.email}
               onChange={handleInputChange}
             />
@@ -88,7 +88,7 @@ export const Login = () => {
             <input
               type="password"
               name="password"
-              placeholder="Введите ваш пароль (обязательно)"
+              placeholder="Введите ваш пароль*"
               value={formData.password}
               onChange={handleInputChange}
             />

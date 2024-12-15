@@ -42,6 +42,12 @@ export const ProductMore = () => {
   ];
 
   const oneData = data.find((item) => item.id === parseInt(id));
+
+  // const oneProduct = useSelector((state) => state.products.oneProduct);
+  // useEffect(() => {
+  //   dispatch(fetchOneProducts(id));
+  // }, [dispatch, id]);
+
   const [count, setCount] = useState(1);
   const [showPopup, setShowPopup] = useState(false);
 

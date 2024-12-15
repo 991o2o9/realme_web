@@ -32,6 +32,17 @@ export const DetailedProduct = () => {
       id: 4,
     },
   ];
+
+  // const dispatch = useDispatch();
+  // const products = useSelector((state) => state.products.products);
+
+  // useEffect(() => {
+  //   if (products.length === 0) {
+  //     dispatch(fetchProducts());
+  //   }
+  // }, [dispatch, products.length]);
+
+  // console.log(products);
   return (
     <Container>
       <div className={styles.contentArea}>

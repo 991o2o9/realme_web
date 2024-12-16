@@ -1,0 +1,60 @@
+.mainBlock {
+  display: flex;
+  justify-content: center;
+  margin: 32px;
+
+  ul {
+    display: flex;
+    gap: 8px;
+    padding: 10px 10px 10px 10px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    width: fit-content;
+    list-style-type: none;
+  }
+
+  .pageItem {
+    color: #000;
+    .pageLink {
+      background: none;
+      display: flex;
+      width: 42px;
+      height: 42px;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      .number {
+        font-size: 20px;
+      }
+    }
+
+    &.active .pageLink {
+      background: #ffca00;
+    }
+
+    .pageMiddle {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  li {
+    .prev,
+    .next {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      border-radius: 7px;
+      cursor: pointer;
+
+      &.disabled {
+        cursor: default;
+      }
+    }
+  }
+}

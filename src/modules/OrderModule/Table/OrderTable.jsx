@@ -4,13 +4,15 @@ import { decrementQuantity, incrementQuantity } from "../store/cartSlice";
 import styles from "./OrderTable.module.scss";
 import { useState } from "react";
 import { Popup } from "../../../ui/PopUpMessage/Popup";
-import { submitOrder } from "../store/createOrder";
+import { submitOrder } from "../api/CreateOrderApi";
 
 export const OrderTable = () => {
+  const currentUser = localStorage.getItem("email");
+  const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
+
   const [popupMessage, setPopupMessage] = useState("");
   const [popupType, setPopupType] = useState("");
-  const dispatch = useDispatch();
 
   const showPopup = (message, type) => {
     setPopupMessage(message);
@@ -24,22 +26,23 @@ export const OrderTable = () => {
   );
 
   const handleOrder = () => {
+    if (!currentUser) {
+      showPopup("Вы должны войти в систему, чтобы сделать заказ.", "error");
+      return;
+    }
+    const item = cartItems[0];
+
     const order = {
-      items: cartItems.map((item) => ({
-        product: {
-          title: item.title,
-          description: item.description,
-          image: item.img,
-          price: item.price,
-        },
-        quantity: item.quantity,
-      })),
+      product: item.id,
+      quantity: item.quantity,
     };
 
     dispatch(submitOrder(order))
       .unwrap()
       .then(() => {
         showPopup("Ваш заказ успешно отправлен!", "success");
+        localStorage.removeItem("cartItems");
+        setTimeout(() => window.location.reload(), 3000);
       })
       .catch((error) => {
         showPopup("Ошибка при отправке заказа", "error");

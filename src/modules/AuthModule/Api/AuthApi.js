@@ -23,9 +23,11 @@ export const handleLogin = createAsyncThunk(
   async ({ formData, email }) => {
     try {
       const { data } = await axios.post(`${API_URL}/login/`, formData);
-
       localStorage.setItem("jwt", data.jwt);
       localStorage.setItem("email", email);
+      const { username, password } = formData;
+      localStorage.setItem("username", username);
+      localStorage.setItem("password", password);
 
       return { jwt: data.jwt, currentUser: email };
     } catch (error) {
@@ -35,11 +37,3 @@ export const handleLogin = createAsyncThunk(
     }
   }
 );
-
-export const axiosInstance = axios.create({
-  baseURL: API_URL,
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-  },
-});

@@ -24,7 +24,6 @@ export const Header = () => {
       setIsMenuVisible((prev) => !prev);
     }
   };
-  console.log(currentUser);
 
   const cartItems = useSelector((state) => state.cart.items);
 

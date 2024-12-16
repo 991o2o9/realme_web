@@ -1,42 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
-const getConfig = () => {
-  const jwt = localStorage.getItem("jwt");
-  if (!jwt) {
-    console.error("JWT token not found");
-    throw new Error("JWT token not found");
-  }
-
-  const Authorization = `Bearer ${jwt}`;
-
-  return {
-    headers: { Authorization },
-  };
-};
-
-export const submitOrder = createAsyncThunk(
-  "order/submit",
-  async (order, { rejectWithValue }) => {
-    try {
-      const config = getConfig();
-      console.log("Request config:", config);
-
-      const response = await axios.post(
-        "http://100.27.228.237/api/v1/cart/items/",
-        order,
-        config
-      );
-
-      return response.data;
-    } catch (error) {
-      console.error("Error details:", error.response || error.message);
-      return rejectWithValue(
-        error.response?.data?.detail || error.message || "Неизвестная ошибка"
-      );
-    }
-  }
-);
+import { createSlice } from "@reduxjs/toolkit";
+import { submitOrder } from "../api/CreateOrderApi";
 
 const orderSlice = createSlice({
   name: "order",

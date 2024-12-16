@@ -5,29 +5,48 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../OrderModule/store/cartSlice";
 import { Popup } from "../../ui/PopUpMessage/Popup";
-import { fetchProducts } from "../ProductsModule/Api/ProductApi";
+import { getOneProd } from "../ProductsModule/Api/ProductApi";
+import Loader from "../../ui/Loading/Loader";
 
 export const ProductMore = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
+  const [popupMessage, setPopupMessage] = useState("");
+  const [popupType, setPopupType] = useState("");
   const [count, setCount] = useState(1);
-  const [showPopup, setShowPopup] = useState(false);
-  const products = useSelector((state) => state.products.products);
+  const [oneProduct, setOneProduct] = useState(null);
+
+  const showPopup = (message, type) => {
+    setPopupMessage(message);
+    setPopupType(type);
+    setTimeout(() => setPopupMessage(""), 3000);
+  };
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    const fetchNews = async () => {
+      const news = await dispatch(getOneProd(id));
+      setOneProduct(news.payload);
+    };
+
+    fetchNews();
   }, [id, dispatch]);
 
-  const oneProduct = products.find((item) => item.id === parseInt(id));
-
-  if (!oneProduct) {
-    return <div>Загрузка...</div>;
-  }
+  if (!oneProduct) return <Loader />;
 
   const increment = () => setCount((prev) => prev + 1);
   const decrement = () => setCount((prev) => (prev > 1 ? prev - 1 : prev));
 
   const handleOrder = () => {
+    const existingItem = cartItems[0];
+
+    if (existingItem) {
+      if (existingItem.id !== oneProduct.id) {
+        showPopup("Больше одного товара нельзя", "error");
+        return;
+      }
+    }
+
     dispatch(
       addToCart({
         id: oneProduct.id,
@@ -38,12 +57,12 @@ export const ProductMore = () => {
         description: oneProduct.description,
       })
     );
-    setShowPopup(true);
-    setTimeout(() => setShowPopup(false), 3000);
+    showPopup("Товар доавлен в корзину", "success");
   };
 
   return (
     <Container>
+      {popupMessage && <Popup message={popupMessage} type={popupType} />}
       <div className={styles.moreSection}>
         <div className={styles.heading}>
           <h2>О товаре</h2>
@@ -68,12 +87,11 @@ export const ProductMore = () => {
               </button>
             </div>
             <div className={styles.btnArea}>
-              <button onClick={handleOrder}>Заказать</button>
+              <button onClick={handleOrder}>Добавить в корзину</button>
             </div>
           </div>
         </div>
       </div>
-      {showPopup && <Popup message="Товар добавлен в корзину!" />}
     </Container>
   );
 };

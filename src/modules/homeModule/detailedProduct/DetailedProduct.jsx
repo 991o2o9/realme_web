@@ -1,17 +1,20 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Container } from "../../../ui/container/Container";
 import { ProductCard } from "../../../ui/productCard/ProductCard";
 import styles from "./DetailedProduct.module.scss";
-import { useEffect } from "react";
-import { fetchProducts } from "../../ProductsModule/Api/ProductApi";
+import { useEffect, useState } from "react";
+import { getAllProducts } from "../../ProductsModule/Api/ProductApi";
+
 export const DetailedProduct = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products.products);
+  const [products, setProducts] = useState([]);
   useEffect(() => {
-    if (products.length === 0) {
-      dispatch(fetchProducts());
-    }
-  }, [dispatch, products.length]);
+    const fetch = async () => {
+      const resp = await dispatch(getAllProducts(1));
+      setProducts(resp.payload.results);
+    };
+    fetch();
+  }, [dispatch]);
 
   return (
     <Container>
@@ -22,11 +25,17 @@ export const DetailedProduct = () => {
             <h3>Качество, которое вы цените</h3>
           </div>
         </div>
-        <div className={styles.productList}>
-          {products.slice(0, 4).map((item, index) => (
-            <ProductCard item={item} key={index} />
-          ))}
-        </div>
+        {!products.length == 0 ? (
+          <div className={styles.productList}>
+            {products.slice(0, 4).map((item, index) => (
+              <ProductCard item={item} key={index} />
+            ))}
+          </div>
+        ) : (
+          <div className={styles.noData}>
+            <h2 style={{ fontSize: "30px" }}>Товаров нету</h2>
+          </div>
+        )}
       </div>
     </Container>
   );

@@ -5,6 +5,7 @@ import { scrollToTop } from "../../../utils/helper/helper";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getBanner } from "./api";
+import Loader from "../../../ui/Loading/Loader";
 export const HeroBlock = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,9 +23,7 @@ export const HeroBlock = () => {
     fetchData();
   }, [dispatch]);
 
-  if (!banner) {
-    return <div>Loading...</div>;
-  }
+  if (!banner) return <Loader />;
 
   return (
     <section

@@ -1,0 +1,22 @@
+.loaderForWebSite {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  .loader {
+    width: 80px;
+    height: 80px;
+    border: 10px solid #ffca00;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: loadingMove 1.2s linear infinite;
+  }
+}
+@keyframes loadingMove {
+  from {
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

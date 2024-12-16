@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import styles from "./Register.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Container } from "../../../ui/container/Container";
 import { path } from "../../../utils/constants/Constants";
 import { TbLockPassword } from "react-icons/tb";
@@ -15,6 +15,7 @@ export const Register = () => {
   const dispatch = useDispatch();
   const [popupMessage, setPopupMessage] = useState("");
   const [popupType, setPopupType] = useState("");
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -55,7 +56,8 @@ export const Register = () => {
           result.error.message || "Не удалось зарегистрироваться"
         );
       }
-      showPopup("Регистрация успешна", "success");
+      showPopup("Регистрация прошла успешно!", "success");
+      navigate(path.login);
     } catch (error) {
       showPopup("Ошибка попробуйте позже!", "error");
       throw new Error(error);

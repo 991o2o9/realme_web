@@ -13,6 +13,13 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
+      if (state.items.length > 0) {
+        const existingItem = state.items[0];
+        if (existingItem.id !== action.payload.id) {
+          alert("Можно добавить только один товар в корзину!");
+        }
+      }
+
       const existingItem = state.items.find(
         (item) => item.id === action.payload.id
       );
@@ -21,6 +28,7 @@ const cartSlice = createSlice({
       } else {
         state.items.push(action.payload);
       }
+
       updateLocalStorage(state.items);
     },
     incrementQuantity: (state, action) => {

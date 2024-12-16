@@ -53,7 +53,7 @@ export const ProductList = () => {
         <Container>
           <h2>Товары</h2>
           <span>
-            {`${useful.length} — Общее количество товаров на ${currentPage}-й странице`}
+            {`Общее количество товаров — ${useful.length} на ${currentPage}-й странице `}
           </span>
         </Container>
       </section>

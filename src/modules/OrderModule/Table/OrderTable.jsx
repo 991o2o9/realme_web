@@ -55,7 +55,7 @@ export const OrderTable = () => {
       <section className={styles.prodHero}>
         <Container>
           <h2>Корзина</h2>
-          <span>{`${cartItems.length} :общее количество товаров`}</span>
+          <span>{`Общее количество товаров: ${cartItems.length} `}</span>
         </Container>
       </section>
       <Container>

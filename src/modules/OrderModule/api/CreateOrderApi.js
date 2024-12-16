@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { API_URL } from "../../../utils/helper/helper";
 
 export const submitOrder = createAsyncThunk(
   "order/submit",
@@ -20,7 +21,7 @@ export const submitOrder = createAsyncThunk(
       };
 
       const response = await axios.post(
-        "http://100.27.228.237/api/v1/cart-items/",
+        `${API_URL}/cart-items/`,
         order,
         config
       );

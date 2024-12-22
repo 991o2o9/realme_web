@@ -38,7 +38,9 @@ export const Footer = () => {
       <div className={styles.content}>
         <div className={styles.contacts}>
           <span>{footerData[0]?.title}</span>
-          <span>{extractEmail(footerData[0]?.link)}</span>
+          <span>
+            {footerData[0]?.link ? extractEmail(footerData[0].link) : null}
+          </span>
           <div className={styles.iconPart}>
             <a href={footerData[0]?.instagram}>
               <FaInstagram />
